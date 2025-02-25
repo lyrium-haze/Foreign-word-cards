@@ -1,18 +1,22 @@
 html {
-    --bg-color: #f2f3f4;
+    --bg-color: #f4f4f4;
     --main-color: #fff;
     --text-color: #333;
     --border-color: #e0e0e0;
     --accent-color: var(--text-color);
     --hover-color: #ccc;
     --el-color: var(--border-color);
+    --card-front-color: #3498db;
+    --card-back-color:  #2ecc71;
   }
   .dark-theme {
-    --bg-color: #565656;
+    --bg-color: linear-gradient(135deg, #232526, #414345);
     --main-color: #454545;
     --text-color: #fff;
     --border-color: #3a3944;
     --accent-color: var(--main-color);
     --hover-color: #5e5e5e;
     --el-color: dimgray;
+    --card-front-color:  #2d2f31;
+    --card-back-color:  #3c3f41;
   }

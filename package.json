@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "homepage": "https://lyrium-haze.github.io/Notes-React",
+  "homepage": "https://lyrium-haze.github.io/LangCards",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
