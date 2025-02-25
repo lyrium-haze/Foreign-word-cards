@@ -44,11 +44,13 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [languages, setLanguages] = React.useState([]);
   const [selectedValue, setSelectedValue] = React.useState("");
-  let val = React.useRef(selectedValue);
   const [theme, setTheme] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [isVisible, setIsVisible] = React.useState(false);
-  let initial = selectedValue;
+  const initialLang = localStorage.getItem("itilialLang");
+  let [language, setLanguage] = React.useState(
+    initialLang !== null ? initialLang : selectedValue
+  );
   const showNotification = (text) => {
     setMessage(text);
     setIsVisible(true);
@@ -71,7 +73,7 @@ function App() {
             </option>
           ))
         );
-        val.current = langData.langForStore[0];
+        localStorage.setItem("itilialLang", langData.langForStore[0]);
       }
     } else {
       // add
@@ -79,22 +81,27 @@ function App() {
       localStorage.setItem("languages", JSON.stringify({ langForStore }));
     }
   }, [languages]);
-  if (selectedValue === "") initial = val.current;
   React.useEffect(() => {
     //if (typeof cards[0] === 'undefined') { // load
-    if (localStorage.getItem(initial) !== null) {
-      let cardsForLoad = JSON.parse(localStorage.getItem(initial));
+    let lang;
+    if (language !== selectedValue && selectedValue !== "") {
+      setLanguage(selectedValue);
+      lang = selectedValue;
+    } else lang = language;
+
+    console.log(language);
+    if (localStorage.getItem(lang) !== null) {
+      let cardsForLoad = JSON.parse(localStorage.getItem(lang));
       cardsForLoad = cardsForLoad.map((card) => (
         <Card
           addMode={false}
           native={card.native}
           foreign={card.foreign}
           setCards={setCards}
-          selectedValue={initial}
+          selectedValue={lang}
         />
       ));
       setCards(cardsForLoad);
-      console.log(cards);
     }
     //}
   }, [selectedValue]);
@@ -124,7 +131,7 @@ function App() {
               ...cards,
               <Card
                 addMode={true}
-                selectedValue={initial}
+                selectedValue={language}
                 setCards={setCards}
               />,
             ]);

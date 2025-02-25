@@ -6,11 +6,11 @@ export default function Card(props) {
   function deleteCard() {
     const cards = JSON.parse(localStorage.getItem(props.selectedValue));
     let changedCards = cards.map((card) => card.native);
-    changedCards = cards.filter((card) => card.native != props.native);
+    changedCards = cards.filter((card) => card.native !== props.native);
     localStorage.setItem(props.selectedValue, JSON.stringify(changedCards));
-    props.setCards((prev) =>
-      prev.filter((card) => card.native != props.native)
-    );
+    props.setCards((prev) => [
+      prev.filter((card) => card.props.native !== props.native),
+    ]);
   }
   function saveCard() {
     let newCard = {
